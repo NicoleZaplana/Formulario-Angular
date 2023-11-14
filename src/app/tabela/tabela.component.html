@@ -1,0 +1,42 @@
+<div class="container">
+  <h3>Playlist de músicas</h3>
+  <table class="table">
+      <thead>
+          <tr>
+              <th>Nome</th>
+              <th>Artista</th>
+              <th>Tempo</th>
+              <th>Configurações</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let musica of listaMusica; let i = index">
+              <td>{{ musica.nome }}</td>
+              <td>{{ musica.artista }}</td>
+              <td>{{ musica.tempo }}</td>
+              <td>
+                  <a href="#" (click)="excluirMusica(i)">Excluir</a> |
+                  <a href="#" (click)="editarMusica(i)">Editar</a>
+              </td>
+          </tr>
+          <tr *ngIf="editarIndex !== -1">
+              <td><input [(ngModel)]="cadastroMusica" ></td>
+              <td><input [(ngModel)]="artistaDaMusica"></td>
+              <td><input [(ngModel)]="tempoDeMusica"></td>
+              <td>
+                  <button (click)="salvarEdicao()">Salvar</button>
+                  <button (click)="cancelarEdicao()">Cancelar</button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+  <div class="container-historico">
+    <h3>Histórico</h3>
+    <button (click)="limparHistorico()">Limpar Histórico</button>
+
+    <ul>
+        <li *ngFor="let item of historicoService.historicos">
+            {{ item.data }} {{ item.hora }} - {{ item.config }}: {{ item.detalhes }}
+        </li>
+    </ul>
+</div>
